@@ -36,8 +36,10 @@ app.post('/api/login', function (req, res) {
         if(reqData.userName == 'admin' && reqData.passWord === '123456' ){
             resData.status = 200; 
             resData.success = true;
-            resData.token = 'tokenadadsaidahdklaw';
-          
+            resData.data = {
+                token:'tokenadadsaidahdklaw'
+            }
+            resData.message = '登录成功'; 
         }else{
             resData.status = 400; 
             resData.sucess = false;
