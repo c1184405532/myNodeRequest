@@ -22,6 +22,43 @@ app.get('/',function(req,res){
     res.write('ip: '+req.ip)
     res.end();
 })
+app.get('/api/list',function(req,res){
+    console.log("列表get 请求",req.query);
+    var reqData = req.query;
+    var resData = {};
+    console.log(reqData.page);
+   
+    if(reqData.page < 3){
+        resData.status = 200; 
+        resData.success = true;
+        let list = [];
+        let num = 10;
+        let total = 23;
+        if(reqData.page === 3){
+            num = 3
+        }
+        for(let i=0; i<num; i++){
+            list.push({
+                name:`姓名${i}`,
+                age:`${20+i}`
+            })
+        }
+        
+        resData.data = {
+            list:list
+        }
+        resData.message = '获取成功'; 
+    }else{
+        resData.data = {
+            list:[]
+        }
+        resData.status = 200; 
+        resData.sucess = true;
+        resData.message = '数据已加载完毕'; 
+    }
+    res.send(resData);
+   
+})
 app.post('/api/login', function (req, res) {
     console.log("主页 post 请求");
     var reqData = '';
