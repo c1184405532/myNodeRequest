@@ -27,14 +27,14 @@ app.get('/api/list',function(req,res){
     var reqData = req.query;
     var resData = {};
     console.log(reqData.page);
-   
-    if(reqData.page < 3){
+    let total = 23;
+    if(reqData.page <= 3){
         resData.status = 200; 
         resData.success = true;
         let list = [];
         let num = 10;
-        let total = 23;
-        if(reqData.page === 3){
+        
+        if(reqData.page == 3){
             num = 3
         }
         for(let i=0; i<num; i++){
@@ -45,12 +45,14 @@ app.get('/api/list',function(req,res){
         }
         
         resData.data = {
-            list:list
+            list:list,
+            total:total
         }
         resData.message = '获取成功'; 
     }else{
         resData.data = {
-            list:[]
+            list:[],
+            total:total
         }
         resData.status = 200; 
         resData.sucess = true;
