@@ -39,7 +39,7 @@ app.get('/api/list',function(req,res){
         }
         for(let i=0; i<num; i++){
             list.push({
-                name:`姓名${i}`,
+                name:`姓名${i+1}`,
                 age:`${20+i}`
             })
         }
@@ -56,8 +56,9 @@ app.get('/api/list',function(req,res){
         resData.sucess = true;
         resData.message = '数据已加载完毕'; 
     }
-    res.send(resData);
-   
+    setTimeout(()=>{
+        res.send(resData);
+    },800)
 })
 app.post('/api/login', function (req, res) {
     console.log("主页 post 请求");
