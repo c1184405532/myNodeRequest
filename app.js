@@ -59,6 +59,7 @@ app.get('/api/list',function(req,res){
         resData.message = '数据已加载完毕'; 
     }
     setTimeout(()=>{
+        //res.status(500)
         res.send(resData);
     },800)
 })
