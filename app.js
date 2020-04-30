@@ -23,6 +23,7 @@ app.get('/',function(req,res){
     res.end();
 })
 app.get('/api/list',function(req,res){
+    
     console.log("列表get 请求",req.query);
     var reqData = req.query;
     var resData = {};
@@ -59,8 +60,22 @@ app.get('/api/list',function(req,res){
         resData.message = '数据已加载完毕'; 
     }
     setTimeout(()=>{
-        //res.status(500)
-        res.send(resData);
+       
+        if(req.headers['x-access-token'] === 'tokenabcdefg'){
+            res.send(resData);
+        }else{
+            res.status(500)
+            res.send({
+                status:500,
+                sucess:false,
+                message:'token过期，请重新登录'
+            });
+        }
+        // res.send({
+        //     status:500,
+        //     sucess:false,
+        //     message:'token过期，请重新登录'
+        // });
     },800)
 })
 app.post('/api/login', function (req, res) {
@@ -78,7 +93,7 @@ app.post('/api/login', function (req, res) {
             resData.status = 200; 
             resData.success = true;
             resData.data = {
-                token:'tokenadadsaidahdklaw'
+                token:'tokenabcdefg'
             }
             resData.message = '登录成功'; 
         }else{
