@@ -22,6 +22,23 @@ app.get('/',function(req,res){
     res.write('ip: '+req.ip)
     res.end();
 })
+app.get('/api/randomRequest', function (req, res) {
+    let data = {}
+    if(Math.ceil(Math.random() * 10) %2 === 0){
+        data.status = 200;
+        data.sucess = true;
+        data.message = '请求成功';
+    }else{
+        data.status = 500;
+        data.sucess = true;
+        data.message = '请求失败';
+        res.status(500)
+    }
+    setTimeout(()=>{
+        res.send(data);
+    },1000)
+    
+})
 app.get('/api/list',function(req,res){
     
     console.log("列表get 请求",req.query);
@@ -78,6 +95,7 @@ app.get('/api/list',function(req,res){
         // });
     },800)
 })
+
 app.post('/api/login', function (req, res) {
     console.log("主页 post 请求");
     var reqData = '';
@@ -101,7 +119,10 @@ app.post('/api/login', function (req, res) {
             resData.sucess = false;
             resData.message = '密码错误'; 
         }
-        res.send(resData);
+        setTimeout(()=>{
+            res.send(resData);
+        },1000)
+       
     })
 })
   
