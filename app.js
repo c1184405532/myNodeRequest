@@ -26,11 +26,11 @@ app.get('/api/randomRequest', function (req, res) {
     let data = {}
     if(Math.ceil(Math.random() * 10) %2 === 0){
         data.status = 200;
-        data.sucess = true;
+        data.success = true;
         data.message = '请求成功';
     }else{
         data.status = 500;
-        data.sucess = true;
+        data.success = true;
         data.message = '请求失败';
         res.status(500)
     }
@@ -73,7 +73,7 @@ app.get('/api/list',function(req,res){
             total:total
         }
         resData.status = 200; 
-        resData.sucess = true;
+        resData.success = true;
         resData.message = '数据已加载完毕'; 
     }
     setTimeout(()=>{
@@ -84,16 +84,16 @@ app.get('/api/list',function(req,res){
             res.status(500)
             res.send({
                 status:500,
-                sucess:false,
+                success:false,
                 message:'token过期，请重新登录'
             });
         }
         // res.send({
         //     status:500,
-        //     sucess:false,
+        //     success:false,
         //     message:'token过期，请重新登录'
         // });
-    },800)
+    },2000)
 })
 
 app.post('/api/login', function (req, res) {
@@ -116,7 +116,7 @@ app.post('/api/login', function (req, res) {
             resData.message = '登录成功'; 
         }else{
             resData.status = 400; 
-            resData.sucess = false;
+            resData.success = false;
             resData.message = '密码错误'; 
         }
         setTimeout(()=>{
@@ -144,7 +144,7 @@ app.put('/api/add/list', function (req, res) {
             resData.message = '添加成功'; 
         }else{
             resData.status = 400; 
-            resData.sucess = false;
+            resData.success = false;
             resData.message = '数据格式错误'; 
         }
         res.send(resData);
@@ -169,7 +169,7 @@ app.delete('/api/delete/list', function (req, res) {
             resData.message = '删除成功'; 
         }else{
             resData.status = 400; 
-            resData.sucess = false;
+            resData.success = false;
             resData.message = '数据格式错误'; 
         }
         res.send(resData);
